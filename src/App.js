@@ -1,22 +1,21 @@
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import './App.css';
-import { Footer, Blog, Header, Feature, Posiblity, Whatgpt } from './container'
-import { Cta, Brand, Navbar } from './components'
+import Navbar from './components/navbar/Navbar';
+import Home from './screens/home/Home';
+import Create from './screens/create/Create';
+
 
 function App() {
   return (
-    <div className='App'>
-      <div className='gradient__bg'>
+    <>
+      <BrowserRouter>
         <Navbar />
-        <Header />
-      </div>
-      <Brand />
-      <Whatgpt />
-      <Feature />
-      <Posiblity />
-      <Cta />
-      <Blog />
-      <Footer />
-    </div>
+        <Routes>
+          <Route path="/" element={<Home />}/>
+          <Route path="/create" element={<Create />}/>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
