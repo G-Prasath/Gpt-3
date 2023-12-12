@@ -1,40 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import './home.css'
-import { Grid } from '@mui/material'
+import Grid from '@mui/material/Grid'
 import ImgMediaCard from '../../components/card/Card'
+import Getdata from '../../hooks/Getdata'
 
 const Home = () => {
-  const [post, setPost] = useState([])
-  const [error, setError] = useState('')
-
-  useEffect(() => {
-    const fetchApis = async () => {
-      const response = await fetch('https://jsonplaceholder.typicode.com/posts')
-
-      const jsonResponse = await response.json()
-
-      if (response.ok) {
-        setPost(jsonResponse)
-      }
-
-      if (!response.ok) {
-        setError(jsonResponse.error)
-        console.log(error);
-      }
-
-    }
-    fetchApis();
-  }, [])
+const {post, error, ispending} = Getdata('https://jsonplaceholder.typicode.com/posts')
 
   return (
     <>
       <Grid container sx={{ justifyContent: 'space-evenly', marginTop: '40px' }}>
         {
-          post && post.map((data, index) => {
+          post && post.slice(0, 10).map((data, index) => {
             return (
               <ImgMediaCard key={index} id={data.id} title={data.title} disc={data.body} />
             )
           })
+        }
+        {
+          error && <h3>{error}</h3>
+        }
+        {
+          ispending && <h3>Loading ...</h3>
         }
       </Grid>
     </>

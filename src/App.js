@@ -3,6 +3,8 @@ import './App.css';
 import Navbar from './components/navbar/Navbar';
 import Home from './screens/home/Home';
 import Create from './screens/create/Create';
+import Postdetails from './screens/postdetails/Postdetails';
+import { Box } from '@mui/material';
 
 
 function App() {
@@ -10,10 +12,13 @@ function App() {
     <>
       <BrowserRouter>
         <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />}/>
-          <Route path="/create" element={<Create />}/>
-        </Routes>
+        <Box>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/create" element={<Create />} />
+            <Route path='/post/:id' element={<Postdetails />} />
+          </Routes>
+        </Box>
       </BrowserRouter>
     </>
   );
